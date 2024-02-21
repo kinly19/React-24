@@ -1,0 +1,10 @@
+# Notes
+
+## File structure
+- Most of our work will be down within the 'src' folder.
+- Public folder is where all our assets will go e.g images, svg etc.
+- The file structure created for us by CRA (create react app) was done in a way
+  React thought was best at the time, This structure can be different depending on
+  how you want things done. (It seems react really doesnt mind where or how things are structured within folders)
+
+

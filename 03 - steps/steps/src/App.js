@@ -38,11 +38,15 @@ import { useState } from "react";
       Can always be identified with the 'use' keyword at the start of each hook e.g (useState, useReducer, useMemo) etc.
       Can only use React hooks at the top level of the function (the component function) not inside an if statement, inside a loop or another function.
 
+  - Children prop
+    https://react.dev/reference/react/Children
+    An empty 'hole' that can be filled by any JSX which the component receives as a children. 
+    Used to display whatever you include between the opening and closing tags when invoking a component.
+    Essential tool to make reusable and configurable components.
+
   - Side notes
     Inside the public folder ('vanilla.html'), you can see the Vanilla implementation of this React project.
 
-  
-    
 */
 
 const messages = [
@@ -83,6 +87,23 @@ const App = () => {
     // setStep(1);
   }
 
+  const Button = ({bgColor, color, onClick, children}) => {
+    return (
+      <button style={{backgroundColor: bgColor, color: color}} onClick={onClick}>
+        {children}
+      </button>
+    )
+  }
+
+  const StepMessage = ({ step, children }) => {
+    return (
+      <div className="message">
+        <h3>Step {step}:</h3>
+        {children}
+      </div> 
+    );
+  };
+
   return (
     <>
       <button className="close" onClick={handleToggle}>&times;</button>
@@ -93,10 +114,10 @@ const App = () => {
             <div className={step >= 2 ? "active" : ""}>2</div>
             <div className={step >= 3 ? "active" : ""}>3</div>
           </div>
-          <p className="message">Step {step}: {messages[step - 1] }</p> {/* 'messages' array in the array of 'step' */}
+          <StepMessage step={step}>{messages[step - 1] }</StepMessage>  {/* 'messages' array in the array of 'step' */}
           <div className="buttons">
-            <button style={{backgroundColor: "#7590f2", color: "#fff"}} onClick={decrementStepHandler}>prev</button>
-            <button style={{backgroundColor: "#7590f2", color: "#fff"}} onClick={incrementStepHandler}>next</button>
+            <Button bgColor={"#7590f2"} color={"#fff"} onClick={decrementStepHandler}><span>👈</span>prev</Button>
+            <Button bgColor={"#7590f2"} color={"#fff"} onClick={incrementStepHandler}><span>👉</span>next</Button>
           </div>
         </div> 
       )}
